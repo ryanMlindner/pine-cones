@@ -2,7 +2,7 @@
 
 # ERD
 
-![Relationship Diagram] 
+![Relationship Diagram](./Dependencies/Phase3ERD.png)
 
 ***
 # File Structure
