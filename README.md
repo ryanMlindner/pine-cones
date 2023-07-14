@@ -1,5 +1,9 @@
 # Pine_Cones, the CLI Text Adventure
 
+# ERD
+
+![Relationship Diagram] 
+
 ***
 # File Structure
 ```console
