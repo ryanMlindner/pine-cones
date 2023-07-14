@@ -46,7 +46,7 @@ as well as greeting/exit art
     │   └── seed.py
     ├── debug.py
     └── helpers
-    |   └── (helper functions)
+        └── (helper functions)
 ```
 ***
 
