@@ -38,13 +38,15 @@ as well as greeting/exit art
 ├── Pipfile
 ├── Pipfile.lock
 ├── README.md
+├── Dependencies
 └── lib
     ├── cli.py
     ├── db
     │   ├── models.py
     │   └── seed.py
     ├── debug.py
-    └── helpers.py
+    └── helpers
+    |   └── (helper functions)
 ```
 ***
 
