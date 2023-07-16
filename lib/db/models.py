@@ -21,6 +21,8 @@ class Tile(Base):
     specialoptions = Column(Integer(), ForeignKey("specialoptions.id"))
     flag = Column(Integer(), ForeignKey("flags.id"))
 
+    #TODO relationships
+
     def __repr__(self):
         return f"Coordinates: {self.coordinates}" #TODO add relevant info
     
@@ -60,5 +62,7 @@ class Flag(Base):
     is_collection = Column(BOOLEAN())
     allows = Column(String())
     description = Column(String())
+
+    #TODO repr
 
 
