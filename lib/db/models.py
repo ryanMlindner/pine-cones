@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, ForeignKey, Table, BOOLEAN
+from sqlalchemy import Column, Integer, String, ForeignKey, BOOLEAN
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
@@ -18,9 +18,6 @@ class Tile(Base):
     south = Column(String(2), ForeignKey("tiles.coordinates"))
     west = Column(String(2), ForeignKey("tiles.coordinates"))
     contents = Column(Integer(), ForeignKey("contents.id"))
-    specialoptions = Column(Integer(), ForeignKey("specialoptions.id"))
-    flag = Column(Integer(), ForeignKey("flags.id"))
-
     #TODO relationships
 
     def __repr__(self):
@@ -32,6 +29,8 @@ class Contents(Base):
     id = Column(Integer(), primary_key=True)
     description = Column(String())
     has_pine_cone = Column(BOOLEAN())
+    specialoptions = Column(Integer(), ForeignKey("specialoptions.id"))
+    flag = Column(Integer(), ForeignKey("flags.id"))
 
     def __repr__(self):
         return f"Description: {self.description}" #TODO add relevant info
@@ -63,6 +62,10 @@ class Flag(Base):
     allows = Column(String())
     description = Column(String())
 
-    #TODO repr
+    def __repr__(self):
+        return f"Description: {self.description}," \
+        + f"required: {self.required}," \
+        + f"acquired: {self.acquired}" \
+        + f"allows: {self.allows}"
 
 

@@ -1,8 +1,8 @@
-"""empty init
+"""Empty Classes Init
 
-Revision ID: 350252a4b49f
+Revision ID: d4aff2e52f47
 Revises: 
-Create Date: 2023-07-15 16:59:17.866437
+Create Date: 2023-07-16 18:49:52.145007
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '350252a4b49f'
+revision = 'd4aff2e52f47'
 down_revision = None
 branch_labels = None
 depends_on = None
