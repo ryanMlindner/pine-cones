@@ -35,18 +35,23 @@ as well as greeting/exit art
 # File Structure
 ```console
 .
+├── Dependencies
+│   └── Phase3ERD.png
 ├── Pipfile
 ├── Pipfile.lock
 ├── README.md
-├── Dependencies
 └── lib
     ├── cli.py
     ├── db
-    │   ├── models.py
-    │   └── seed.py
+    │   ├── alembic.ini
+    │   ├── migrations
+    │   │   ...
+    │   ├── models.py
+    │   ├── pine_cones.db
+    │   └── seed.py
     ├── debug.py
     └── helpers
-        └── (helper functions)
+        ...
 ```
 ***
 
@@ -59,31 +64,23 @@ $ pipenv shell
 ```
 ***
 
-## Generating Your Database
+## Map
 
-Once you're in your environment, you can start development wherever you'd like.
-We think it's easiest to start with setting up your database.
-
-`cd` into the `lib/db` directory, then run `alembic init migrations` to set up
-Alembic. Modify line 58 in `alembic.ini` to point to the database you intend to
-create, then replace line 21 in `migrations/env.py` with the following:
-
-```py
-from models import Base
-target_metadata = Base.metadata
+```console
+┌─────┬─────┬─────┬─────┬─────┐
+|     |     |     |     |     |
+|─────┼─────┼─────┼─────┼─────|
+|     |     |  TT |     |     |
+|─────┼─────┼─────┼─────┼─────|
+|  O  |  S  |  BT |  H  |  B  |
+|─────┼─────┼─────┼─────┼─────|
+|     |  P  |  F  |     |     |
+|─────┼─────┼─────┼─────┼─────|
+|     |     |     |     |     |
+└─────┴─────┴─────┴─────┴─────┘
 ```
 
-We haven't created our `Base` or any models just yet, but we know where they're
-going to be. Navigate to `models.py` and start creating those models. Remember
-to regularly run `alembic revision --autogenerate -m'<descriptive message>'` and
-`alembic upgrade head` to track your modifications to the database and create
-checkpoints in case you ever need to roll those modifications back.
 
-If you want to seed your database, now would be a great time to write out your
-`seed.py` script and run it to generate some test data. You may want to use
-Pipenv to install Faker to save you some time.
-
-***
 
 ## Generating Your CLI
 
