@@ -46,5 +46,6 @@ def show_map(coordinates):
           '''%(north, west, east, south))
 
 def greeting():
+    """Description of the game, input to start or look at the map"""
     print("TODO! Make me say something fun!")
     # select = input()
