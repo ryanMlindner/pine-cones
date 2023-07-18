@@ -21,7 +21,8 @@ class Tile(Base):
     #TODO relationships
 
     def __repr__(self):
-        return f"Coordinates: {self.coordinates}" #TODO add relevant info
+        return f"Coordinates: {self.coordinates}, " \
+        + f"Contents: {self.contents}"
     
 class Contents(Base):
     __tablename__ = 'contents'
