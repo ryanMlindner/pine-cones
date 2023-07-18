@@ -21,8 +21,7 @@ class Tile(Base):
     #TODO relationships
 
     def __repr__(self):
-        return f"Coordinates: {self.coordinates}, " \
-        + f"Contents: {self.contents}"
+        return f"Coordinates: {self.coordinates}"
     
 class Contents(Base):
     __tablename__ = 'contents'
@@ -34,7 +33,7 @@ class Contents(Base):
     flag = Column(Integer(), ForeignKey("flags.id"))
 
     def __repr__(self):
-        return f"Description: {self.description}" #TODO add relevant info
+        return f"Description: {self.description}"
 
 class Specialoptions(Base):
     __tablename__ = 'specialoptions'

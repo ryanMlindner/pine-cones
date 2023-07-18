@@ -9,11 +9,23 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
+class Progression():
+    def __init__(self, pine_cones):
+        self.pine_cones = pine_cones
+    
+    def pick_up_pine_cone(self):
+        self.pine_cones += 1
+    
+    def check_completed(self):
+        if self.pine_cones == 2:
+            return True
+        else: return False
+
+user = Progression(0) #quick. and. dirty.
+
 def cli_start():
     """Entry point of the interface"""
     greeting()
-
-    #TODO decide where to put logic for stuff. my brain has still exploded.
 
 def show_map(tile):
     """Print a map of N,E,S,W from the current location"""
@@ -69,7 +81,7 @@ def start_game():
 
 def prompt_input(tile):
     """Main game loop, movement and interaction with tiles"""
-    valid_commands = ['m', 'n', 'e', 's', 'w', 'i', 'q', '']
+    valid_commands = ['m', 'n', 'e', 's', 'w', 'i', 'q', 'h', '']
     select = ''
     while select != 'q':
         #ipdb.set_trace()
@@ -83,6 +95,8 @@ def prompt_input(tile):
                     tile = attempt
             if select == 'i':
                 inspect_location(tile)
+            if select == 'h':
+                show_help_text()
         else: 
             print("not a valid command!")
     farewell()
@@ -92,14 +106,30 @@ def try_to_move(tile, direction):
     If there is a tile in that direction,
     returns that tile, else returns False    
     """
-    print("I tried to move. this code isn't written yet so i failed!")
-    #TODO write this lol
+    if direction == 'n':
+        if tile.north != '':
+            print(f"moving north! now at {tile.north}")
+            return session.query(Tile).get(tile.north)
+    if direction == 'e':
+        if tile.east != '':
+            print(f"moving east! now at {tile.east}")
+            return session.query(Tile).get(tile.east)
+    if direction == 'w':
+        if tile.west != '':
+            print(f"moving west! now at {tile.west}")
+            return session.query(Tile).get(tile.west)
+    if direction == 's':
+        if tile.south != '':
+            print(f"moving south! now at {tile.south}")
+            return session.query(Tile).get(tile.south)
+    print("I tried to move. There's nothing in that direction that I can move to!")
     return False
 
 def inspect_location(tile):
     """Secondary game loop, do things specific to tiles, such as
     pick up pine cones, climb trees, meditate, go through portals
     """
+    print()
     print("its a tile! I'm not written yet!")
     #TODO write this lol
 
@@ -118,5 +148,6 @@ def show_help_text():
     go south: (s)
     go west: (w)
     inspect current location: (i)
+    show this menu: (h)
     quit: (q)
     ''')

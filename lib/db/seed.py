@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from gamedescriptions import *
+
 from models import Tile, Contents, Specialoptions, Flag
 
 engine = create_engine('sqlite:///pine_cones.db')
@@ -38,18 +40,18 @@ if __name__ == '__main__':
                   east="", south="C3", west="",
                   contents=8)
     
-    contentsA3 = Contents(id=1, description="Oracle", has_pine_cone=False)
-    contentsB3 = Contents(id=2, description="Start", has_pine_cone=False)
-    contentsC3 = Contents(id=3, description="Baby Tree", has_pine_cone=False,
+    contentsA3 = Contents(id=1, description=oracle(), has_pine_cone=False)
+    contentsB3 = Contents(id=2, description=start(), has_pine_cone=False)
+    contentsC3 = Contents(id=3, description=baby_tree(), has_pine_cone=False,
                           specialoptions=1)
-    contentsD3 = Contents(id=4, description="House", has_pine_cone=True, 
+    contentsD3 = Contents(id=4, description=house(), has_pine_cone=True, 
                           flag=1)
-    contentsE3 = Contents(id=5, description="Basement", has_pine_cone=False,
+    contentsE3 = Contents(id=5, description=basement(), has_pine_cone=False,
                           specialoptions=2)
-    contentsB4 = Contents(id=6, description="Portal", has_pine_cone=False,
+    contentsB4 = Contents(id=6, description=portal(), has_pine_cone=False,
                           specialoptions=3)
-    contentsC4 = Contents(id=7, description="Field", has_pine_cone=False)
-    contentsC2 = Contents(id=8, description="Twin Trees", has_pine_cone=True,
+    contentsC4 = Contents(id=7, description=field(), has_pine_cone=False)
+    contentsC2 = Contents(id=8, description=twin_trees(), has_pine_cone=True,
                           flag=2)
 
     specialoptionsC3 = Specialoptions(id=1, meditate=True)
