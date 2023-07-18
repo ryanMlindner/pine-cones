@@ -18,7 +18,8 @@ class Tile(Base):
     south = Column(String(2), ForeignKey("tiles.coordinates"))
     west = Column(String(2), ForeignKey("tiles.coordinates"))
     contents = Column(Integer(), ForeignKey("contents.id"))
-    #TODO relationships
+    
+    content = relationship('Contents', backref='tile')
 
     def __repr__(self):
         return f"Coordinates: {self.coordinates}"
