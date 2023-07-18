@@ -131,14 +131,17 @@ def inspect_location(tile):
     print(contents)
     valid_inputs = ['h', 'q']
 
-    pick_up = ''
     if contents.has_pine_cone == True:
-        pick_up = 'pick up pine cone: (p)'
+        pick_up ='''
+        pick up pine cone: (p)'''
         flag = session.query(Flag).get(contents.flag)
         if flag.acquired == True:
-            pick_up = 'already picked up this pine cone!'
+            pick_up = '''
+        already picked up this pine cone!'''
         else:
             valid_inputs.append('p')
+        print(pick_up)
+    
     if isinstance(contents.specialoptions, int):
         options = session.query(Specialoptions).get(contents.specialoptions)
     else:
@@ -151,21 +154,24 @@ def inspect_location(tile):
                                options.portal]
         if special_option_list[0] != None:
             valid_inputs.append('c')
-            print('''climb up a tree! You'll just climb back down for now: (c)''')
+            print('''
+    climb up a tree! You'll just climb back down for now: (c)''')
         if special_option_list[1] != None:
             valid_inputs.append('d')
-            print('''dig into the ground a bit! You'll just get back out for now: (d)''')
+            print('''
+    dig into the ground a bit! You'll just get back out for now: (d)''')
         if special_option_list[2] != None:
             valid_inputs.append('o')
-            print('''chop down a tree! You'll get some exercise and look very cool: (o)''')
+            print('''
+    chop down a tree! You'll get some exercise and look very cool: (o)''')
         if special_option_list[3] != None:
             valid_inputs.append('m')
-            print('''meditate. Calming. (m)''')
+            print('''
+    meditate. Calming. (m)''')
         if special_option_list[4] != None:
             valid_inputs.append('P')
             print('''
-    If you have all them pine cones, you can win the game now! (P)
-    ''')
+    If you have all them pine cones, you can win the game now! (P)''')
     print(f'''
     {pick_up}
     stop looking at this tile and go back to the map: (q)
