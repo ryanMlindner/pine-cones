@@ -130,6 +130,8 @@ def inspect_location(tile):
     contents = session.query(Contents).get(tile.contents)
     print(contents)
     valid_inputs = ['h', 'q']
+    option_statements = '''
+    stop looking at this tile and go back to the map: (q)'''
 
     if contents.has_pine_cone == True:
         pick_up ='''
@@ -140,7 +142,8 @@ def inspect_location(tile):
         already picked up this pine cone!'''
         else:
             valid_inputs.append('p')
-        print(pick_up)
+        option_statements = option_statements + f'''
+    {pick_up}'''
     
     if isinstance(contents.specialoptions, int):
         options = session.query(Specialoptions).get(contents.specialoptions)
@@ -154,31 +157,28 @@ def inspect_location(tile):
                                options.portal]
         if special_option_list[0] != None:
             valid_inputs.append('c')
-            print('''
-    climb up a tree! You'll just climb back down for now: (c)''')
+            option_statements = option_statements + '''
+    climb up a tree! You'll just climb back down for now: (c)'''
         if special_option_list[1] != None:
             valid_inputs.append('d')
-            print('''
-    dig into the ground a bit! You'll just get back out for now: (d)''')
+            option_statements = option_statements + '''
+    dig into the ground a bit! You'll just get back out for now: (d)'''
         if special_option_list[2] != None:
             valid_inputs.append('o')
-            print('''
-    chop down a tree! You'll get some exercise and look very cool: (o)''')
+            option_statements = option_statements + '''
+    chop down a tree! You'll get some exercise and look very cool: (o)'''
         if special_option_list[3] != None:
             valid_inputs.append('m')
-            print('''
-    meditate. Calming. (m)''')
+            option_statements = option_statements + '''
+    meditate. Calming. (m)'''
         if special_option_list[4] != None:
             valid_inputs.append('P')
-            print('''
-    If you have all them pine cones, you can win the game now! (P)''')
-    print(f'''
-    {pick_up}
-    stop looking at this tile and go back to the map: (q)
-    ''')
+            option_statements = option_statements + '''
+    If you have all them pine cones, you can win the game now! (P)'''
 
     select = ''
     while select != 'q':
+        print(option_statements)
         select = input()
         if select in valid_inputs:
             if select == 'p':
@@ -187,7 +187,30 @@ def inspect_location(tile):
                     flag.acquired = True
                 else:
                     print("You can't pick up this pine cone twice!")
-                #TODO fill out the rest of the options logic, then we are... done?
+            if select == 'c':
+                print('''
+    Yay! You climbed a tree! This may do things later...''')
+                
+            if select == 'd':
+                print('''
+    Yay! You dug a hole! This may do things later...''')
+                
+            if select == 'o':
+                print('''
+    Yay! You did lumberjack things! This may do things later...''')
+                
+            if select == 'm':
+                print('''
+    Yay! You meditated! Why are there exclamation points...''')
+                
+            if select == 'P':
+                if user.check_completed():
+                    print('''
+    Congratulations! You won the game! Thanks for playing!''')
+                else:
+                    print('''
+    You don't seem to have enough pine cones...''')
+        
         else:
             print("not a valid input!")
     select = ''
