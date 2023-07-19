@@ -69,7 +69,7 @@ def greeting():
         if select == 's':
             start_game()
             select = ''
-    farewell()
+    farewell(False)
     
 def start_game():
     """Sets the start location, leads into the main game loop"""
@@ -97,7 +97,7 @@ def prompt_input(tile):
                 show_help_text()
         else: 
             print("not a valid command!")
-    farewell()
+    farewell(False)
 
 def try_to_move(tile, direction):
     """Attempt to move in a cardinal direction. 
@@ -135,11 +135,11 @@ def inspect_location(tile):
 
     if contents.has_pine_cone == True:
         pick_up ='''
-        pick up pine cone: (p)'''
+    pick up pine cone: (p)'''
         flag = session.query(Flag).get(contents.flag)
         if flag.acquired == True:
             pick_up = '''
-        already picked up this pine cone!'''
+    already picked up this pine cone!'''
         else:
             valid_inputs.append('p')
         option_statements = option_statements + f'''
@@ -184,9 +184,12 @@ def inspect_location(tile):
             if select == 'p':
                 if flag.acquired == False:
                     user.pick_up_pine_cone()
+                    print(f'''
+    You've picked up a pine cone: {flag.description}''')
                     flag.acquired = True
                 else:
-                    print("You can't pick up this pine cone twice!")
+                    print('''
+    You can't pick up this pine cone twice!''')
             if select == 'c':
                 print('''
     Yay! You climbed a tree! This may do things later...''')
@@ -207,6 +210,7 @@ def inspect_location(tile):
                 if user.check_completed():
                     print('''
     Congratulations! You won the game! Thanks for playing!''')
+                    farewell(True)
                 else:
                     print('''
     You don't seem to have enough pine cones...''')
@@ -216,9 +220,15 @@ def inspect_location(tile):
     select = ''
     prompt_input(tile)
 
-def farewell():
+def farewell(won):
     """End script"""
-    print("Thank you for playing!")
+    
+    if won:
+        print(
+    "This is a totally cool and worth it reward for winning. This is it. This print statement")
+        
+    else:
+        print("Thank you for playing!")
     exit()
 
 def show_help_text():
